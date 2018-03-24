@@ -1,6 +1,5 @@
 import express from 'express';
 import game from './game';
-import {io} from "../server";
 
 const router = express.Router();
 

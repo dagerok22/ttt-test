@@ -9,11 +9,6 @@
     "webpackWatch": "webpack --watch"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-es2017": "^6.24.1",
-    "body-parser": "~1.18.2",
-    "bunyan": "^1.8.12",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
@@ -21,13 +16,21 @@
     "hbs": "^4.0.1",
     "http": "^0.0.0",
     "lodash": "^4.17.5",
-    "log4js": "^2.5.3",
     "mongoose": "^5.0.10",
     "morgan": "~1.9.0",
     "nodemon-webpack-plugin": "^0.1.6",
     "path": "^0.12.7",
     "serve-favicon": "~2.4.5",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2017": "^6.24.1",
+    "body-parser": "~1.18.2",
+    "bunyan": "^1.8.12",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
   }
