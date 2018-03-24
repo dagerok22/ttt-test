@@ -24,27 +24,24 @@
     }
 
     function cellClicked(e) {
-        console.log(e);
-        if (isMyTurn) {
+        console.log('cellClicked');
+        if (isMyTurn && e.currentTarget.className.length === 0) {
+            isMyTurn = false;
             var idSplitted = e.currentTarget.id.split('-');
             socket.emit('player-turn', {row: idSplitted[1], column: idSplitted[2]});
-            if (e.currentTarget.className.length === 0)
-                e.currentTarget.className = PLAYER_ONE_CLASS;
-            isMyTurn = false;
         }
     }
 
     function updateUI({field: newField, winner}) {
+        console.log('updateUI');
+        console.log(newField);
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
-                console.log(newField[i][j]);
                 switch (newField[i][j]) {
                     case 1:
-                        console.log(newField[i][j]);
                         field[i][j].addClass(PLAYER_ONE_CLASS);
                         break;
                     case 2:
-                        console.log(newField[i][j]);
                         field[i][j].addClass(PLAYER_TWO_CLASS);
                         break;
                     default:
@@ -55,31 +52,35 @@
             }
         }
         if (winner) {
+            isMyTurn = false;
             $('#result-modal').modal();
             $('.modal-body').html(winner === 1 ? 'Winner: You' : winner === 2 ? 'Winner: AI' : 'Draw');
             $('#retry-button').click(function () {
+                console.log('retry');
                 socket.emit('retry');
             });
             $('#save-download-button').click(function () {
+                console.log('download');
                 socket.emit('download');
             });
+        }else {
+            isMyTurn = true;
         }
     }
 
 
     socket.on('connection-status', function (status) {
+        console.log('connection-status');
         $('#status').html(status);
-        console.log(status);
     });
     socket.on('update-field', function (result) {
+        console.log('update-field');
         if (result)
             updateUI(result);
-        isMyTurn = true;
     });
     socket.on('update-field-retry', function (result) {
-        console.log(result);
+        console.log('update-field-retry');
         if (result)
             updateUI(result);
-        isMyTurn = true;
     });
 })();

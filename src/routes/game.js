@@ -8,10 +8,9 @@ const router = express.Router();
 router.get('/', (req, res)=>{
     io.on('connection', (socket)=>{
         logger.info('Connected');
-        const game = new Game(1);
-        // const room = '' +  Math.ceil(Math.random() * 100) + Date.now();
-        // logger.info(`Room ${room}`);
-        // socket.join(room);
+        let game;
+        if(game === undefined)
+        game = new Game(1);
         socket.emit('connection-status', 'connected');
         socket.emit('update-field', game.getState());
 
@@ -27,7 +26,6 @@ router.get('/', (req, res)=>{
         socket.on('disconnect', ()=>{
             logger.info('Disconnected');
             socket.emit('connection-status', 'Disconnected');
-            game.retry();
         })
     });
     return res.render('game');
