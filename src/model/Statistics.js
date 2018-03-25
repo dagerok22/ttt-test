@@ -31,7 +31,6 @@ gameSchema.virtual('formattedWinner').get(function() {
 const statisticsSchema = new mongoose.Schema({
     user: {
         type: String,
-        required: true,
     },
     games: {
         type: [gameSchema],
