@@ -64,9 +64,8 @@
                 console.log('retry');
                 socket.emit('retry');
             });
-            $('#save-download-button').click(function() {
-                console.log('download');
-                socket.emit('download');
+            $('#get-stats-button').click(function() {
+                socket.emit('save-stats');
             });
         } else {
             isMyTurn = true;
@@ -89,5 +88,11 @@
         if (result) {
             updateUI(result);
         }
+    });
+    socket.on('stats-saved', function(result) {
+        $('#result-modal').modal('hide');
+        socket.disconnect();
+        window.location.href += `/statistics/${result}`;
+        console.log(result);
     });
 })();

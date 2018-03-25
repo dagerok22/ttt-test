@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {logger} from '../logger';
 
 
 class Game {
@@ -24,6 +25,21 @@ class Game {
             winner: this._winner,
         };
     };
+
+    getStats() {
+        const stats = this._games.map((gameStat) => {
+            let gameObj = {
+                winner: gameStat.winner,
+                moves: gameStat.turns,
+            };
+            return gameObj;
+        });
+        logger.info(this);
+        if (this._winner) {
+            stats.push({winner: this._winner, moves: this._turns});
+        }
+        return stats;
+    }
 
     retry(indexOfPlayerToTurnFirst) {
         if (this._winner) {

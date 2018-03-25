@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        table{
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+        td{
+            padding: 16px;
+            border: 1px solid black;
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>You stats</h2>
+    <table>
+        {{#each games}}
+            <tr>
+                <td>{{this.formattedWinner}}</td>
+                {{#each this.moves}}
+                <td>
+                    <p>row: {{this.row}}</p>
+                    <p>column: {{this.column}}</p>
+                    <p>player: {{this.player}}</p>
+                </td>
+                {{/each}}
+            </tr>
+        {{/each}}
+    </table>
+</body>
+
+</html>

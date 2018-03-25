@@ -6,7 +6,7 @@
   "scripts": {
     "buildServ": "node ./build/backend.js",
     "webpack": "webpack && node ./build/backend.js",
-    "webpackWatch": "webpack --watch"
+    "start": "webpack --watch"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
