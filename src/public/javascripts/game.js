@@ -2,7 +2,10 @@
     let PLAYER_ONE_CLASS = 'cross';
     let PLAYER_TWO_CLASS = 'zero';
     let isMyTurn = true;
-    let socket = io();
+    let socket = io({
+        transports: ['websocket'],
+        upgrade: false
+    });
     let table = $('table');
 
     let field = getBaseField();
@@ -94,5 +97,9 @@
         socket.disconnect();
         window.location.href += `/statistics/${result}`;
         console.log(result);
+    });
+
+    $(window).on('beforeunload', function(){
+        socket.disconnect();
     });
 })();
