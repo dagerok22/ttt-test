@@ -46,12 +46,12 @@
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 switch (newField[i][j]) {
-                    case 1:
+                    case 'X':
                         if (!field[i][j].hasClass(PLAYER_TWO_CLASS)) {
                             field[i][j].addClass(PLAYER_ONE_CLASS);
                         }
                         break;
-                    case 2:
+                    case 'O':
                         if (!field[i][j].hasClass(PLAYER_ONE_CLASS)) {
                             field[i][j].addClass(PLAYER_TWO_CLASS);
                         }
@@ -66,7 +66,7 @@
         if (winner) {
             isMyTurn = false;
             $('#result-modal').modal();
-            $('.modal-body').html(winner === 1 ? 'Winner: You' : winner === 2 ? 'Winner: AI' : 'Draw');
+            $('.modal-body').html(winner === 'X' ? 'Winner: You' : winner === 'O' ? 'Winner: AI' : 'Draw');
             $('#retry-button').click(function() {
                 console.log('retry');
                 socket.emit('retry');

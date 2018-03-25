@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const moveSchema = new mongoose.Schema({
     row: Number,
     column: Number,
-    player: Number,
+    player: String,
 });
 
 const gameSchema = new mongoose.Schema({
     winner: {
-        type: Number,
+        type: String,
         required: true,
     },
     moves: {

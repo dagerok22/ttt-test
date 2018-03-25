@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   io.on('connection', (socket) => {
     logger.info('Connected');
-    const game = new Game(1);
+    const game = new Game('X');
     socket.emit('connection-status', 'connected');
     socket.emit('update-field', game.getState());
 
@@ -24,12 +24,14 @@ router.get('/', (req, res) => {
     });
 
     socket.on('player-turn', (cords) => {
-      let result = game.playerTurn(cords, 1);
+        logger.info('Player ', game.HUMAN_PLAYER);
+      let result = game.playerTurn(cords, game.HUMAN_PLAYER);
+      logger.info('results', result);
       socket.emit('update-field', result);
     });
 
     socket.on('retry', () => {
-      let result = game.retry(1);
+      let result = game.retry(game.HUMAN_PLAYER);
       socket.emit('update-field-retry', result);
     });
     socket.on('disconnect', () => {
