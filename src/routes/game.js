@@ -16,7 +16,9 @@ router.get('/', (req, res) => {
 
     socket.on('save-stats', async ()=>{
         const stats = new Statistics();
-        stats.user = socket.request.connection.remoteAddress;
+        stats.user = socket.handshake.address.address;
+        logger.info('saving with user ', stats.user);
+        logger.info('socket handshake address ', socket.handshake.address);
         stats.games = game.getStats();
         await stats.save();
         logger.info('stats saved', stats);

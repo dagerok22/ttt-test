@@ -4,7 +4,7 @@
     let isMyTurn = true;
     let socket = io({
         transports: ['websocket'],
-        upgrade: false
+        upgrade: false,
     });
     let table = $('table');
 
@@ -47,10 +47,14 @@
             for (let j = 0; j < 3; j++) {
                 switch (newField[i][j]) {
                     case 1:
-                        field[i][j].addClass(PLAYER_ONE_CLASS);
+                        if (!field[i][j].hasClass(PLAYER_TWO_CLASS)) {
+                            field[i][j].addClass(PLAYER_ONE_CLASS);
+                        }
                         break;
                     case 2:
-                        field[i][j].addClass(PLAYER_TWO_CLASS);
+                        if (!field[i][j].hasClass(PLAYER_ONE_CLASS)) {
+                            field[i][j].addClass(PLAYER_TWO_CLASS);
+                        }
                         break;
                     default:
                         field[i][j].removeClass(PLAYER_ONE_CLASS);
@@ -82,6 +86,7 @@
     });
     socket.on('update-field', function(result) {
         console.log('update-field');
+        console.log(result);
         if (result) {
             updateUI(result);
         }
@@ -99,7 +104,7 @@
         console.log(result);
     });
 
-    $(window).on('beforeunload', function(){
+    $(window).on('beforeunload', function() {
         socket.disconnect();
     });
 })();
